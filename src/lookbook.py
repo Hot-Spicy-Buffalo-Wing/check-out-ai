@@ -66,15 +66,15 @@ def get_uv(areaNo: str):
         highest_uv=max(highest_uv, int(got_uv["response"]["body"]["items"]["item"][0][f"h{i}"]))
 
     if 0<=highest_uv<=2:
-        uv_level="낮음"
+        uv_level="약하고"
     elif 3<=highest_uv<=5:
-        uv_level="보통"
+        uv_level="적당하고"
     elif 6<=highest_uv<=7:
-        uv_level="높음"
+        uv_level="강하고"
     elif 8<=highest_uv<=10:
-        uv_level="매우높음"
+        uv_level="매우 강하고"
     elif 11<=highest_uv:
-        uv_level="위험"
+        uv_level="위험한 수준이고"
 
     return uv_level
 
@@ -106,7 +106,7 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
     TPO_string=""
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
-    prompt=f"{get_uv(areaNo)} 수준의 자외선, 최대 {highest_sensed_temperature}도, 최저 {lowest_sensed_temperature}인 날씨에 덥거나 춥지 않게 입을 수 있고, {ageRange} {gender}가 {TPO_string}입기 좋은 옷을 입은 한 명의 한국인 모델이, 깔끔한 배경에 자연스러운 포즈를 취한 전신 사진을 1024x1792 크기로 생성해주세요."
+    prompt=f"자외선이 {get_uv(areaNo)}, {lowest_sensed_temperature}도부터 {highest_sensed_temperature}도에서 덥거나 춥지 않게 입을 수 있고, {TPO_string}입기 좋은 옷차림의 {ageRange} {gender} 한국인 모델이, 깔끔한 배경에 자연스러운 포즈를 취한 전신 사진을 1024x1792 크기로 생성해주세요."
     
     response=client.images.generate(
         model="dall-e-3",
