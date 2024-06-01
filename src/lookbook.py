@@ -106,7 +106,7 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
     TPO_string=""
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
-    prompt=f"{get_uv(areaNo)} 수준의 자외선, 최대 {highest_sensed_temperature}도, 최저 {lowest_sensed_temperature}인 날씨에 덥거나 춥지 않게 입을 수 있고, {ageRange} {gender}가 {TPO_string}입기 좋은 옷을 입은 한국인 모델이, 깔끔한 배경에 자연스러운 포즈를 취한 머리, 무릎, 신발까지 포함한 가로가 짧고 세로가 긴 형태의 사진을 생성해주세요. 사진은 편집 없이 모델 한 명의 모습만 담겨야합니다."
+    prompt=f"{get_uv(areaNo)} 수준의 자외선, 최대 {highest_sensed_temperature}도, 최저 {lowest_sensed_temperature}인 날씨에 덥거나 춥지 않게 입을 수 있고, {ageRange} {gender}가 {TPO_string}입기 좋은 옷을 입은 한 명의 한국인 모델이, 깔끔한 배경에 자연스러운 포즈를 취한 전신 사진을 1024x1792 크기로 생성해주세요."
     
     response=client.images.generate(
         model="dall-e-3",
