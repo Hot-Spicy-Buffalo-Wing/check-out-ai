@@ -1,8 +1,9 @@
 from enum import Enum
 from pydantic import BaseModel
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from lookbook import get_lookbook
+from image import image_service
 
 app = FastAPI()
 
@@ -32,8 +33,16 @@ class Area(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
-@app.post("/lookbook/")
+@app.post("/lookbook")
 async def get_lookbook_endpoint(gender: Gender, ageRange: AgeRange, area: Area, TPO: list[str]):
     # return {"gender": f"{gender.value}", "ageRange": f"{ageRange.value}", "area": f"{area.model_dump()}", "TPO": f"{type(TPO)}"}
     prompt, url= get_lookbook(gender.value, ageRange.value, area.model_dump(), TPO.copy())
+    # print("prompt done")
+# 
+    # try:
+        # image_uuid = image_service(url="https://via.placeholder.com/150x150")
+        # image_uuid = image_service(url=url)
     return {"prompt": prompt, "url": url}
+    # except Exception as e:
+        # print(e)
+        # raise HTTPException(status_code=422, detail="Image upload error\n" + str(e))
