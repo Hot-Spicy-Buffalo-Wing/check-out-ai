@@ -10,6 +10,14 @@ province=areaNo_df["1단계"].unique().tolist()
 city=areaNo_df["2단계"].unique().tolist()
 district=areaNo_df["3단계"].unique().tolist()
 # %%
-def get_areaNo(province, city, district):
-    areaNo=areaNo_df[(areaNo_df["1단계"]==province)&(areaNo_df["2단계"]==city)&(areaNo_df["3단계"]==district)]["행정구역코드"].values[0]
-    return areaNo
+def get_areaNo(province=None, city=None, district=None):
+    if province:
+        filtered_areaNo_df=areaNo_df[areaNo_df["1단계"]==province]
+        if city:
+            filtered_areaNo_df=filtered_areaNo_df[filtered_areaNo_df["2단계"]==city]
+            if district:
+                filtered_areaNo_df=filtered_areaNo_df[filtered_areaNo_df["3단계"]==district]
+    return filtered_areaNo_df["행정구역코드"].values[0]
+# %%
+#get_areaNo("서울특별시", "강남구")["행정구역코드"].values[0]
+# %%
