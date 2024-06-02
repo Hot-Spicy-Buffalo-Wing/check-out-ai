@@ -108,12 +108,15 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
     prompt=f"자외선이 {get_uv(areaNo)}, {lowest_sensed_temperature}도부터 {highest_sensed_temperature}도에서 덥거나 춥지 않게 입을 수 있고, {TPO_string}입기 좋은 옷차림의 {ageRange} {gender} 한국인모델이, 깔끔한 배경에 자연스러운 포즈를 취한 전신 사진을 1024x1792 크기로 생성해주세요."
     
-    response=client.images.generate(
-        model="dall-e-3",
-        prompt=prompt,
-        size="1024x1792",
-        n=1
-    )
+    try:
+        response=client.images.generate(
+            model="dall-e-3",
+            prompt=prompt,
+            size="1024x1792",
+            n=1
+        )
+    except Exception as e:
+        return (prompt, str(e))
 
     return (prompt, response.data[0].url)
 
