@@ -40,6 +40,7 @@ jobs:
           ECR_REPOSITORY: check-out-ai
           IMAGE_TAG: dev${{ github.run_number }}
         with:
+          platforms: linux/arm64
           context: .
           push: true
           tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
