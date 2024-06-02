@@ -29,14 +29,21 @@ class Area(BaseModel):
     city: str
     district: str
 
+
+class Item(BaseModel):
+    gender: Gender
+    ageRange: AgeRange
+    area: Area
+    TPO: list[str]
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
 @app.post("/lookbook")
-async def get_lookbook_endpoint(gender: Gender, ageRange: AgeRange, area: Area, TPO: list[str]):
+async def get_lookbook_endpoint(item: Item):
     # return {"gender": f"{gender.value}", "ageRange": f"{ageRange.value}", "area": f"{area.model_dump()}", "TPO": f"{type(TPO)}"}
-    prompt, url= get_lookbook(gender.value, ageRange.value, area.model_dump(), TPO.copy())
+    prompt, url= get_lookbook(item.gender.value, item.ageRange.value, item.area.model_dump(), item.TPO.copy())
     # print("prompt done")
 # 
     # try:
