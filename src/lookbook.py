@@ -46,7 +46,16 @@ def get_sensed_temperature(areaNo: str) -> tuple[int, int]:
         highest_sensed_temperature=max(highest_sensed_temperature, int(got_sensed_temperature["response"]["body"]["items"]["item"][0][f"h{i}"]))
         lowest_sensed_temperature=min(lowest_sensed_temperature, int(got_sensed_temperature["response"]["body"]["items"]["item"][0][f"h{i}"]))
 
-    return highest_sensed_temperature, lowest_sensed_temperature
+    if highest_sensed_temperature<21:
+        return "선선한"
+    elif 21<=highest_sensed_temperature<25:
+        return "온화한"
+    elif 25<=highest_sensed_temperature<28:
+        return "더운"
+    elif 28<=highest_sensed_temperature<31:
+        return "매우 더운"
+    elif 31<=highest_sensed_temperature:
+        return "극심하게 더운"
 
 #get_sensed_temperature("1100000000")
 # %%
@@ -101,12 +110,12 @@ TPO_template={
 # %%
 def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"province":"", "city":"", "district":""}, TPO: list[str]= [""] ) -> str:
     areaNo=areaNo_py.get_areaNo(area["province"], area["city"], area["district"])
-    highest_sensed_temperature, lowest_sensed_temperature=get_sensed_temperature(areaNo)
+    sensed_temperature=get_sensed_temperature(areaNo)
     
     TPO_string=""
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
-    prompt=f"자외선이 {get_uv(areaNo)}, {lowest_sensed_temperature}도부터 {highest_sensed_temperature}도에서 덥거나 춥지 않게 입을 수 있고, {TPO_string}입기 좋은 옷차림의 {ageRange} {gender} 한국인모델이, 깔끔한 배경에 자연스러운 포즈를 취한 전신 사진을 1024x1792 크기로 생성해주세요."
+    prompt=f"자외선이 {get_uv(areaNo)}, {sensed_temperature} 날씨에서 {TPO_string}입기 좋은 옷차림의 {ageRange} {gender} 한국인 모델이, 깔끔한 배경에서 상하의가 모두 나온 사진을 1024x1792 크기로 생성해주세요."
     
     try:
         response=client.images.generate(
