@@ -122,7 +122,7 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
         {ageRange} {gender} 한국인 모델이,
         깔끔한 배경에 있는 사진.
         전신만 나와야하고, 상하의가 모두 나와야 함.
-        다른 설명은 없어야 함.
+        다른 설명은 없어야 하고 배경이 없이 1024x1792픽셀을 모두 채워야 함.
     """.strip().replace("\n", " ")
     
     try:
