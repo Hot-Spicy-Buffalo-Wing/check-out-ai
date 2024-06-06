@@ -115,7 +115,13 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
     TPO_string=""
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
-    prompt=f"자외선이 {get_uv(areaNo)}, {sensed_temperature} 날씨에서 {TPO_string}입기 좋은 옷차림의 {ageRange} {gender} 한국인 모델이, 깔끔한 배경에서 상하의가 모두 나온 세로 방향 사진을 1024x1792 크기로 생성해주세요."
+    prompt=f"""
+        자외선이 {get_uv(areaNo)},
+        {sensed_temperature} 날씨에서
+        {TPO_string}입기 좋은 옷차림의
+        {ageRange} {gender} 한국인 모델이,
+        깔끔한 배경에서 상하의가 모두 나온 전신 사진
+    """.strip().replace("\n", " ")
     
     try:
         response=client.images.generate(
