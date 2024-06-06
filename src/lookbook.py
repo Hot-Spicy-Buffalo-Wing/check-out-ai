@@ -120,7 +120,9 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
         {sensed_temperature} 날씨에서
         {TPO_string}입기 좋은 옷차림의
         {ageRange} {gender} 한국인 모델이,
-        깔끔한 배경에서 상하의가 모두 나온 전신 사진
+        깔끔한 배경에 있는 사진.
+        전신만 나와야하고, 상하의가 모두 나와야 함.
+        다른 설명은 없어야 함.
     """.strip().replace("\n", " ")
     
     try:
