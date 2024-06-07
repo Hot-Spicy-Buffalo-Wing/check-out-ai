@@ -116,22 +116,21 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
     prompt=f"""
-A Korean model shows appropriate outfit for situation.
+A Korean model shows appropriate outfit for specific situation.
 
 # Requirements
-- 자외선 농도: '{get_uv(areaNo)}'
-- 날씨: '{sensed_temperature}'
-- 상황: '{TPO_string}'
-- 나이: '{ageRange}'
-- 성별: '{gender}'
+- UV: '{get_uv(areaNo)}'
+- weather: '{sensed_temperature}'
+- TPO: '{TPO_string}'
+- age: '{ageRange}'
+- gender: '{gender}'
 
 # Guideline
-- 1024x1792픽셀
-- 깔끔한 배경에서 찍은 전신 사진
-- 머리부터 발끝까지 나온 전신 하나
-- 사람 외에 다른 사물은 없어야 함
-- 한국인 모델 한명
-- 전신 사진 외 다른 구도는 없어야 함
+- 1024x1792pixel
+- Full-length photos taken on a clean background
+- One full body from head to toe
+- No objects other than one korean model
+- No composition other than a full-body frontal shot
     """.strip()
     
     try:
