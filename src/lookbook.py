@@ -130,7 +130,8 @@ A Korean model shows appropriate outfit for specific situation.
 - Full-length photos taken on a clean background
 - One full body from head to toe
 - No objects other than one korean model
-- No composition other than a full-body frontal shot
+- No more shot other than a full-body frontal shot
+- No illustration and text other than person
     """.strip()
     
     try:
