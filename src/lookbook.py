@@ -127,10 +127,11 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
 
 ## 출력 결과
 - 1024x1792픽셀
-- 깔끔한 배경
+- 깔끔한 배경에서 찍은 전신 사진
 - 머리부터 발끝까지 나온 전신
 - 사람 외에 다른 사물은 없어야 함
-- 한국인 모델
+- 한국인 모델 한명
+- 전신 사진 외 다른 구도는 없어야 함
 
 ## context
 - 자외선 농도: {get_uv(areaNo)}
