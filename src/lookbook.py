@@ -116,14 +116,29 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
     prompt=f"""
-자외선이 {get_uv(areaNo)},
-{sensed_temperature} 날씨에서
-{TPO_string}입기 좋은 옷차림의
-{ageRange} {gender} 한국인 모델이,
-깔끔한 배경에 있는 사진.
-머리부터 발끝까지인 전신만 나와야하고
-다른 설명은 없어야 하고 배경이 없이 1024x1792픽셀을 모두 채워야 함.
-    """.strip().replace("\n", " ")
+# 룩북 생성기
+
+## 필요 요소
+- 자외선 농도
+- 날씨
+- 상황
+- 나이
+- 성별
+
+## 출력 결과
+- 1024x1792픽셀
+- 깔끔한 배경
+- 머리부터 발끝까지 나온 전신
+- 사람 외에 다른 사물은 없어야 함
+- 한국인 모델
+
+## context
+- 자외선 농도: {get_uv(areaNo)}
+- 날씨: {sensed_temperature}
+- 상황: {TPO_string}
+- 나이: {ageRange}
+- 성별: {gender}
+    """.strip()
     
     try:
         response=client.images.generate(
