@@ -116,7 +116,7 @@ def get_lookbook(gender: str= "", ageRange: str= "", area: dict[str, str]= {"pro
     for i in range(len(TPO)):
         TPO_string+=(TPO[i]+" "+TPO_template[TPO[i]]+" ")
     prompt=f"""
-# 룩북 생성기
+# 룩북 생성기, 코디 추천기
 
 ## 필요 요소
 - 자외선 농도
